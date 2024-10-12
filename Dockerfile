@@ -1,5 +1,5 @@
-# Usa una imagen base de Windows con .NET Framework y SDK
-FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
+# Etapa de construcción
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Establece el directorio de trabajo
 WORKDIR /src
@@ -9,22 +9,25 @@ COPY webapi/webapi.csproj ./webapi/
 COPY webapi/. ./webapi/
 
 # Restaura las dependencias
-RUN nuget restore ./webapi/webapi.csproj
+RUN dotnet restore ./webapi/webapi.csproj
 
-# Compila el proyecto
-RUN msbuild ./webapi/webapi.sln /p:Configuration=Release /p:Platform="Any CPU"
+# Compila la aplicación
+RUN dotnet build ./webapi/webapi.csproj -c Release -o /app/build
 
-# Usa una imagen base de Windows con IIS para la ejecución
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+# Publica la aplicación
+RUN dotnet publish ./webapi/webapi.csproj -c Release -o /app/publish
 
-# Establece el directorio de trabajo en IIS
-WORKDIR /inetpub/wwwroot
+# Etapa de ejecución
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-# Copia los archivos de la aplicación desde la etapa de compilación
-COPY --from=build /src/webapi/bin/Release/ .
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Copia los archivos publicados desde la etapa de construcción
+COPY --from=build /app/publish .
 
 # Expone el puerto 80 para acceder a la API Web
 EXPOSE 80
 
-# Inicia IIS para servir la API
-ENTRYPOINT ["cmd.exe", "/c", "C:\\ServiceMonitor.exe w3svc"]
+# Establece el punto de entrada para la aplicación
+ENTRYPOINT ["dotnet", "webapi.dll"]
