@@ -1,33 +1,33 @@
-# Etapa de construcción
+# etapa: construcción
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-# Establece el directorio de trabajo
+# directorio de trabajo
 WORKDIR /src
 
-# Copia el archivo de solución y el proyecto
+# copiando archivos 
 COPY webapi/webapi.csproj ./webapi/
 COPY webapi/. ./webapi/
 
-# Restaura las dependencias
+# restaurando dependencias
 RUN dotnet restore ./webapi/webapi.csproj
 
-# Compila la aplicación
+# compilando
 RUN dotnet build ./webapi/webapi.csproj -c Release -o /app/build
 
-# Publica la aplicación
+# publicando
 RUN dotnet publish ./webapi/webapi.csproj -c Release -o /app/publish
 
-# Etapa de ejecución
+# etapa: ejecución
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-# Establece el directorio de trabajo en el contenedor
+# directorio de trabajo del contenedor
 WORKDIR /app
 
-# Copia los archivos publicados desde la etapa de construcción
+# copiando los archivos a publicar
 COPY --from=build /app/publish .
 
-# Expone el puerto 80 para acceder a la API Web
+# exponiendo el puerto 8080 para acceder - activar el public en forwader port
 EXPOSE 8080
 
-# Establece el punto de entrada para la aplicación
+# punto de entrada de la aplicación
 ENTRYPOINT ["dotnet", "webapi.dll"]
