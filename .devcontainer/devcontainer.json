@@ -1,0 +1,9 @@
+ {
+     "name": "My Docker Environment",
+     "dockerFile": "./Dockerfile",  // Ruta al archivo Dockerfile
+     "settings": {
+       "terminal.integrated.shell.linux": "/bin/bash"
+     },
+     "extensions": [],  // Puedes agregar extensiones de VS Code si las necesitas
+     "postCreateCommand": "echo 'Codespace setup complete!'"
+   }
