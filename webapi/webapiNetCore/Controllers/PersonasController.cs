@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webapi.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace webapi.Controllers
 {
     [Route("api/[controller]")]
@@ -53,9 +51,16 @@ namespace webapi.Controllers
         }
 
         // DELETE api/<PersonasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{dni}")]
+        public IActionResult Delete(int dni)
         {
+            var p = personas.Where(p => p.DNI == dni).FirstOrDefault();
+
+            if (p == null) return NotFound();
+
+            personas.Remove(p);
+
+            return Ok();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.OpenApi;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿
+
 namespace webapi.Models
 {
     public class Persona
