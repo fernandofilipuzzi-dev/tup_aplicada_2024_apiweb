@@ -13,13 +13,19 @@ le pongo un nombre random a la imagen
 
 ```
 docker build -t webapi .
+docker images
 ```
 
 ## ejecuta el contenedor
 
 ```
 docker run -d -p 8080:80 webapi
+docker ps
 ```
+
+
+
+
 
 
 Ejemplo
@@ -94,3 +100,38 @@ de6125ac1dbe   webapi    "dotnet webapi.dll"   About a minute ago   Up About a m
 abre una pagina 
 
 https://obscure-giggle-g4pgx9gj7jj29x7x-8080.app.github.dev/
+
+
+## quitar una imagen
+```@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker ps
+CONTAINER ID   IMAGE     COMMAND               CREATED              STATUS              PORTS                                             NAMES
+ce39fdadf6be   webapi    "dotnet webapi.dll"   About a minute ago   Up About a minute   8080/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp   amazing_hopper
+
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker stop ce39fdadf6be
+ce39fdadf6be
+
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker rm ce39fdadf6be
+ce39fdadf6be
+
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker rmi webapi
+Untagged: webapi:latest
+Deleted: sha256:39040c3795cd74bbb4f91a533eaa9ad94d64a24085e44f1b3c6566f583cc9bca
+
+
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+<none>       <none>    2e995ba6d0d0   24 minutes ago   220MB
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker rmi 2e995ba6d0d0
+Deleted: sha256:2e995ba6d0d0f6df0300474e0920e4d9b64c42ccff041823e81053d977e27d2c
+
+```
+
+
+localmente funciona.
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ curl http://localhost:8080/weatherforecast/
+[{"date":"2024-10-13","temperatureC":8,"temperatureF":46,"summary":"Hot"},{"date":"2024-10-14","temperatureC":-2,"temperatureF":29,"summary":"Warm"},{"date":"2024-10-15","temperatureC":-6,"temperatureF":22,"summary":"Mild"},{"date":"2024-10-16","temperatureC":1,"temperatureF":33,"summary":"Chilly"},{"date":"2024-10-17","temperatureC":47,"temperatureF":116,"summary":"Cool"}]@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ 
+
+curl https://obscure-giggle-g4pgx9gj7jj29x7x.github.dev/weatherforecast/
+
+
+en la parte inferniro, hay un icono torre, que es forwader port - pasarlo a public

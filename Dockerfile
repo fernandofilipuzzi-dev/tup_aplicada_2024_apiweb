@@ -27,7 +27,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # Expone el puerto 80 para acceder a la API Web
-EXPOSE 80
+EXPOSE 8080
 
 # Establece el punto de entrada para la aplicación
 ENTRYPOINT ["dotnet", "webapi.dll"]
