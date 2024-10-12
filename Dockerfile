@@ -5,17 +5,17 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # copiando archivos 
-COPY webapi/webapiNetCore/webapiNetCore.csproj ./webapi/
-COPY webapi/webapiNetCore/. ./webapi/
+COPY webapi/webapiNetCore/webapiNetCore.csproj ./webapiNetCore/
+COPY webapi/webapiNetCore/. ./webapiNetCore/
 
 # restaurando dependencias
-RUN dotnet restore ./webapi/webapiNetCore.csproj
+RUN dotnet restore ./webapiNetCore/webapiNetCore.csproj
 
 # compilando
-RUN dotnet build ./webapi/webapiNetCore.csproj -c Release -o /app/build
+RUN dotnet build ./webapiNetCore/webapiNetCore.csproj -c Release -o /app/build
 
 # publicando
-RUN dotnet publish ./webapi/webapiNetCore.csproj -c Release -o /app/publish
+RUN dotnet publish ./webapiNetCore/webapiNetCore.csproj -c Release -o /app/publish
 
 # etapa: ejecución
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
