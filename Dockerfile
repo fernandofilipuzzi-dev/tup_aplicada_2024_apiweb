@@ -30,4 +30,4 @@ COPY --from=build /app/publish .
 EXPOSE 8080
 
 # punto de entrada de la aplicación
-ENTRYPOINT ["dotnet", "webapi.dll"]
+ENTRYPOINT ["dotnet", "webapiNetCore.dll"]

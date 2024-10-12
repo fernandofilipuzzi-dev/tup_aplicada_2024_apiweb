@@ -19,14 +19,15 @@ docker images
 ## ejecuta el contenedor
 
 ```
-docker run -d -p 8080:80 webapi
+docker run -d -p 8080:80 webapi:latest
 docker ps
 ```
 
+## lista todas las imagenes
+docker images -q
 
-
-
-
+docker stop $(docker images -q)
+docker rmi -f $(docker images -q)
 
 Ejemplo
 
