@@ -140,3 +140,9 @@ curl https://obscure-giggle-g4pgx9gj7jj29x7x.github.dev/weatherforecast/
 ```
 
 en la parte inferniro, hay un icono torre, que es forwader port - pasarlo a public
+
+
+# abre sessión interactiva con el navegador
+```
+docker exec -it cc10fe727e9f /bin/bash
+```
