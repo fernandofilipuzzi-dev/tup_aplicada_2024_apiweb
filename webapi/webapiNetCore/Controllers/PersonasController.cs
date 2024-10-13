@@ -7,7 +7,7 @@ namespace webapi.Controllers
     [ApiController]
     public class PersonasController : ControllerBase
     {
-        static List<Persona> personas = new List<Persona> { new Persona { DNI = 2343243, Nombre = "Agustina" } };
+        static List<Persona> personas = new List<Persona> { new Persona { DNI = 2343243, Nombre = "Agustina" } , new Persona { DNI = 43234245, Nombre = "Cesar" } };
 
         // GET: api/<PersonasController>
         [HttpGet]
