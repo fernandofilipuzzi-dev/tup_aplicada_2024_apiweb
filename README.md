@@ -146,3 +146,23 @@ en la parte inferniro, hay un icono torre, que es forwader port - pasarlo a publ
 ```
 docker exec -it cc10fe727e9f /bin/bash
 ```
+
+
+#dockerhub
+
+docker login
+
+
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker tag webapi:v1.6 fernandofilipuzzidev/webapi:v1.6
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ docker push fernandofilipuzzidev/webapi:v1.6
+The push refers to repository [docker.io/fernandofilipuzzidev/webapi]
+eb2140af9575: Pushed 
+b533187a9d33: Pushed 
+ea9d34e19430: Pushed 
+f9b82ee3d2d8: Pushed 
+eb516300731b: Pushed 
+53d4df978da8: Pushed 
+fbbd726292f0: Pushed 
+8d853c8add5d: Pushed 
+v1.6: digest: sha256:999450f8f0990d86816526552e5ffac0bebd270654837ad8a982ba72d1507a07 size: 1998
+@fernandofilipuzzi-dev ➜ /workspaces/tup_aplicada_2024_apiweb (main) $ 
