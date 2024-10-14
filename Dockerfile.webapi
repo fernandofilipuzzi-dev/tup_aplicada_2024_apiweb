@@ -27,4 +27,4 @@ COPY --from=build /app/build .
 EXPOSE 80
 
 # punto de entrada de la aplicación
-ENTRYPOINT ["MyWebApiApp.exe"]
+ENTRYPOINT ["webapi.exe"]
