@@ -14,6 +14,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Login to Docker Hub
+      run: |
+        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
     - name: Build Docker image
       run: |
         docker build -f Dockerfile.webapi -t webapi:v1.7 .
+
+    - name: Tag Docker image
+      run: |
+        docker tag webapi:v1.7 ${{ secrets.DOCKERHUB_USERNAME }}/webapi:v1.7
+  
+    - name: Push Docker image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/webapi:v1.7
