@@ -7,12 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente", "Cliente\Cliente.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapiNetCore", "webapiNetCore\webapiNetCore.csproj", "{221F5D93-3492-4A42-9C64-AE6851E55CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi", "webapi\webapi.csproj", "{2D2CCCCC-2409-40D5-8E26-43AD35345864}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{DF6150BE-CA1D-42A8-BB48-98DE7D3F1645}"
 	ProjectSection(SolutionItems) = preProject
 		..\Dockerfile = ..\Dockerfile
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi", "webapi\webapi.csproj", "{2D2CCCCC-2409-40D5-8E26-43AD35345864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
