@@ -9,7 +9,9 @@ COPY webapi/webapi/webapi.csproj ./webapi/
 COPY webapi/webapi/. ./webapi/
 
 # restaurando dependencias
-RUN nuget restore ./webapi/webapi.csproj
+RUN nuget restore ./webapi/webapi.csproj  -PackagesDirectory ./webapi/packages
+
+RUN mkdir -p /app/build
 
 # compilando
 RUN msbuild ./webapi/webapi.csproj /p:Configuration=Release /p:OutputPath=/app/build
