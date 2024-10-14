@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 
 # directorio de trabajo
-WORKDIR /src
+WORKDIR C:/src
 
 # copiando archivos 
 COPY webapi/webapi/webapi.csproj ./webapi/
@@ -11,19 +11,19 @@ COPY webapi/webapi/. ./webapi/
 # restaurando dependencias
 RUN nuget restore ./webapi/webapi.csproj  -PackagesDirectory ./webapi/packages
 
-RUN mkdir -p /app/build
+RUN mkdir C:\app\build
 
 # compilando
-RUN msbuild ./webapi/webapi.csproj /p:Configuration=Release /p:OutputPath=/app/build
+RUN msbuild ./webapi/webapi.csproj /p:Configuration=Release /p:OutputPath=C:\app\build
 
 # etapa: ejecución
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
 
 # directorio de trabajo del contenedor
-WORKDIR /app
+WORKDIR C:/app
 
 # copiando los archivos a publicar
-COPY --from=build /app/build . 
+COPY --from=build C:/app/build . 
 
 # exponiendo el puerto 8080 para acceder - activar el public en forwader port
 EXPOSE 80
