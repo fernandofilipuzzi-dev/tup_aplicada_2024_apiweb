@@ -1,0 +1,30 @@
+# etapa: construcción
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
+
+# directorio de trabajo
+WORKDIR /src
+
+# copiando archivos 
+COPY webapi/webapi/webapi.csproj ./webapi/
+COPY webapi/webapi/. ./webapi/
+
+# restaurando dependencias
+RUN nuget restore ./webapi/webapi.csproj
+
+# compilando
+RUN msbuild ./webapi/webapi.csproj /p:Configuration=Release /p:OutputPath=/app/build
+
+# etapa: ejecución
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
+
+# directorio de trabajo del contenedor
+WORKDIR /app
+
+# copiando los archivos a publicar
+COPY --from=build /app/build . 
+
+# exponiendo el puerto 8080 para acceder - activar el public en forwader port
+EXPOSE 80
+
+# punto de entrada de la aplicación
+ENTRYPOINT ["MyWebApiApp.exe"]
