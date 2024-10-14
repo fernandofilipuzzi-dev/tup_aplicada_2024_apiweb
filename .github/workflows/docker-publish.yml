@@ -1,9 +1,10 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  #push:
+  #  branches:
+  #    - main
 
 jobs:
   build:
@@ -12,9 +13,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Setup NuGet
-      run: nuget restore ./webapi/webapi/webapi.csproj
 
     - name: Build Docker image
       run: |
