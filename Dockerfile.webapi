@@ -11,7 +11,7 @@ COPY webapi/webapi/. ./webapi/
 # restaurando dependencias
 RUN nuget restore ./webapi/webapi.csproj  -PackagesDirectory C:/src/webapi/packages
 
-RUN nuget install Microsoft.CodeDom.Providers.DotNetCompilerPlatform -Version 2.0.1 -OutputDirectory ./webapi/packages
+RUN nuget install Microsoft.CodeDom.Providers.DotNetCompilerPlatform -Version 2.0.1 -OutputDirectory C:/src/webapi/packages
 
 RUN mkdir C:\app\build 
 
