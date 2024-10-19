@@ -1,0 +1,35 @@
+# etapa: construcción
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
+
+# directorio de trabajo
+WORKDIR C:/src
+
+# copiando archivos 
+COPY webapi/webapi/webapi.csproj ./webapi/
+COPY webapi/webapi/. ./webapi/
+
+# restaurando dependencias
+RUN nuget restore ./webapi/webapi.csproj  -PackagesDirectory C:/nuget/packages
+# -PackagesDirectory ./webapi/packages
+
+RUN nuget install Microsoft.CodeDom.Providers.DotNetCompilerPlatform -Version 2.0.1 -OutputDirectory ./webapi/packages /p:RestorePackagesPath=C:/nuget/packages
+
+RUN mkdir C:\app\build 
+
+# compilando
+RUN msbuild ./webapi/webapi.csproj /p:Configuration=Release /p:OutputPath=C:\app\build
+
+# etapa: ejecución
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
+
+# directorio de trabajo del contenedor
+WORKDIR C:/app
+
+# copiando los archivos a publicar
+COPY --from=build C:/app/build . 
+
+# exponiendo el puerto 8080 para acceder - activar el public en forwader port
+EXPOSE 80
+
+# punto de entrada de la aplicación
+ENTRYPOINT ["webapi.exe"]
