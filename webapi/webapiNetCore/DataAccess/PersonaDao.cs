@@ -9,8 +9,8 @@ namespace webapi.DataAccess
 {
     public class PersonaDao
     {
-       private readonly string _connectionString;
-
+       private readonly string _connectionString=@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql;
+";
         public PersonaDao(string connectionString)
         {
             _connectionString = connectionString;
@@ -45,7 +45,7 @@ namespace webapi.DataAccess
                         {
                             Id = reader.GetInt32(0),
                             Nombre = reader.GetString(1),
-                            Apellido = reader.GetString(2)
+                            DNI=reader.GetInt32(1)
                         };
                         personas.Add(persona);
                     }
