@@ -1,12 +1,20 @@
 # etapa: construcción
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
+
+USER root
+RUN apt-get update 
+RUN apt-get install -y gss-ntlmssp krb5-user libkrb5-dev openssl libssl-dev 
+RUN rm -rf /var/lib/apt/lists/*
+
 # directorio de trabajo
 WORKDIR /src
 
 # copiando archivos 
 COPY webapi/webapiNetCore/webapiNetCore.csproj ./webapi/
 COPY webapi/webapiNetCore/. ./webapi/
+
+RUN dotnet add package Microsoft.Data.SqlClient
 
 # restaurando dependencias
 RUN dotnet restore ./webapi/webapiNetCore.csproj
