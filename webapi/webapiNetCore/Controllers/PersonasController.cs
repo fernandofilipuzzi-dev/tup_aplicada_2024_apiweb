@@ -17,7 +17,7 @@ namespace webapi.Controllers
            // _personaDao = new PersonaDao(@"Server=172.17.0.2,1433;Initial Catalog=Mydatabse;User Id=SA;Password=MSS-fernando-sql;Persist Security Info=False;Trusted_Connection=False;Encrypt=False;TrustServerCertificate=True;");
            // _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=SA;Password=MSS-fernando-sql;Trusted_Connection=True;Encrypt=False;");
             //_personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
-             _personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;Trusted_Connection=True;TrustServerCertificate=True;");
+             _personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;TrustServerCertificate=True;");
         }
 
         // GET: api/<PersonasController>
