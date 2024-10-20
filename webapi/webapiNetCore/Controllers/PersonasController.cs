@@ -10,6 +10,11 @@ namespace webapi.Controllers
     public class PersonasController : ControllerBase
     {
         private readonly PersonaDao _personaDao;
+
+        public PersonasController()
+        {
+            _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql"); 
+        }
         
         // GET: api/<PersonasController>
         [HttpGet]

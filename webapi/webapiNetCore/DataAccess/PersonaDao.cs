@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using webapi.Models;
 
@@ -6,8 +6,7 @@ namespace webapi.DataAccess
 {
     public class PersonaDao
     {
-       private readonly string _connectionString=@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql;
-";
+       private readonly string _connectionString=@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql";
         public PersonaDao(string connectionString)
         {
             _connectionString = connectionString;
@@ -17,9 +16,10 @@ namespace webapi.DataAccess
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("INSERT INTO Personas (DNI, Nombre) VALUES (@DNI, @Nombre)", connection);
+                var command = new SqlCommand("INSERT INTO Personas (DNI, Nombre, Fecha_Nacimiento) VALUES (@DNI, @Nombre, @Fecha_Nacimiento)", connection);
                 command.Parameters.AddWithValue("@DNI", persona.DNI);
                 command.Parameters.AddWithValue("@Nombre", persona.Nombre);
+                command.Parameters.AddWithValue("@Fecha_Nacimiento", persona.FechaNacimiento);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -40,9 +40,10 @@ namespace webapi.DataAccess
                     {
                         var persona = new Persona
                         {
-                            Id = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            DNI=reader.GetInt32(1)
+                            Id = reader.GetInt32("Id"),
+                            DNI=reader.GetInt32("DNI"),
+                            Nombre = reader.GetString("Nombre"),
+                            FechaNacimiento=reader.GetDateTime("Fecha_Nacimiento")
                         };
                         personas.Add(persona);
                     }
