@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 using webapi.Models;
 using webapi.DataAccess;
@@ -16,8 +16,12 @@ namespace webapi.Controllers
             // _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=SA;Password=MSS-fernando-sql;Trusted_Connection=True;Encrypt=False;");
            // _personaDao = new PersonaDao(@"Server=172.17.0.2,1433;Initial Catalog=Mydatabse;User Id=SA;Password=MSS-fernando-sql;Persist Security Info=False;Trusted_Connection=False;Encrypt=False;TrustServerCertificate=True;");
            // _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=SA;Password=MSS-fernando-sql;Trusted_Connection=True;Encrypt=False;");
-            //_personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
-             _personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;TrustServerCertificate=True;");
+            //_personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD,1433;User Id=SA;Password=MSS-fernando-sql;TrustServerCertificate=True;Trusted_Connection=True;Encrypt=False;");
+
+             //funciono
+             //_personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
+             //_personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;TrustServerCertificate=True;");
+             _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasDB;User Id=sa;Password=MSS-fernando-sql;TrustServerCertificate=True;"); 
         }
 
         // GET: api/<PersonasController>
