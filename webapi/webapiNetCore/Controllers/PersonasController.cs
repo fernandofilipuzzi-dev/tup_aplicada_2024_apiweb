@@ -11,7 +11,7 @@ namespace webapi.Controllers
     {
         private readonly PersonaDao _personaDao;
 
-        public PersonasController()
+        public PersonasController() 
         {
             // _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=SA;Password=MSS-fernando-sql;Trusted_Connection=True;Encrypt=False;");
            // _personaDao = new PersonaDao(@"Server=172.17.0.2,1433;Initial Catalog=Mydatabse;User Id=SA;Password=MSS-fernando-sql;Persist Security Info=False;Trusted_Connection=False;Encrypt=False;TrustServerCertificate=True;");
