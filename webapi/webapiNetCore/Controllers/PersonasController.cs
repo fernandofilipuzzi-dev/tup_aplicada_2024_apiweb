@@ -13,9 +13,10 @@ namespace webapi.Controllers
 
         public PersonasController()
         {
-            _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql"); 
+            _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql;Trusted_Connection=True;TrustServerCertificate=True;");
+           // _personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
         }
-        
+
         // GET: api/<PersonasController>
         [HttpGet]
         public IActionResult Get()

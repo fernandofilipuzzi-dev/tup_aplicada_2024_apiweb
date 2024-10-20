@@ -6,7 +6,8 @@ namespace webapi.DataAccess
 {
     public class PersonaDao
     {
-       private readonly string _connectionString=@"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql";
+        private readonly string _connectionString = @"Server=172.17.0.2;Database=PersonasBD;User Id=sa;Password=MSS-fernando-sql";
+
         public PersonaDao(string connectionString)
         {
             _connectionString = connectionString;
@@ -41,9 +42,9 @@ namespace webapi.DataAccess
                         var persona = new Persona
                         {
                             Id = reader.GetInt32("Id"),
-                            DNI=reader.GetInt32("DNI"),
+                            DNI = reader.GetInt32("DNI"),
                             Nombre = reader.GetString("Nombre"),
-                            FechaNacimiento=reader.GetDateTime("Fecha_Nacimiento")
+                            FechaNacimiento = reader.GetDateTime("Fecha_Nacimiento")
                         };
                         personas.Add(persona);
                     }
