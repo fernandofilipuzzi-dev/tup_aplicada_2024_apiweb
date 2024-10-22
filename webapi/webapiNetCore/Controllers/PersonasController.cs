@@ -21,7 +21,7 @@ namespace webapi.Controllers
              //funciono
              //_personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
              //_personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;TrustServerCertificate=True;");
-             _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasDB;User Id=sa;Password=MSS-fernando-sql;TrustServerCertificate=True;"); 
+             _personaDao = new PersonaDao(@"Server=172.17.0.3;Database=PersonasDB;User Id=sa;Password=MSS-fernando-sql;TrustServerCertificate=True;"); 
         }
 
         // GET: api/<PersonasController>
@@ -35,7 +35,8 @@ namespace webapi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Ocurrió un error al obtener las personas.", error = ex.Message+"|"+ ex.StackTrace});
+                //return StatusCode(500, new { message = "Ocurrió un error al obtener las personas.", error = ex.Message+"|"+ ex.StackTrace});
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);
             }
         }
 
