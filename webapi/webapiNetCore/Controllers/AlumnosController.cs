@@ -20,49 +20,80 @@ namespace webapi.Controllers
         [HttpGet("{dni}")]
         public IActionResult Get(int dni)
         {
-            var p= personas.Where(p=>p.DNI==dni).FirstOrDefault();
-            return Ok(p);
+            try
+            {
+                var p= personas.Where(p=>p.DNI==dni).FirstOrDefault();
+
+                if(p!=null)
+                return Ok(p);
+                else
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);  
+            }
         }
 
         // POST api/<PersonasController>
         [HttpPost]
         public IActionResult Post([FromBody] Persona nueva)
         {
-            var p = personas.Where(p => p.DNI == nueva.DNI).FirstOrDefault();
+            try
+            {
+                var p = personas.Where(p => p.DNI == nueva.DNI).FirstOrDefault();
 
-            if(p!=null) return Conflict(p);
+                if(p!=null) return Conflict(p);
 
-            personas.Add(nueva);
-            return Ok(nueva);
+                personas.Add(nueva);
+                return Ok(nueva);
+            }
+            catch(Exception ex)
+            {
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);  
+            }
         }
 
         // PUT api/<PersonasController>/5
         [HttpPut("{dni}")]
         public IActionResult Put(int dni, [FromBody] Persona persona)
         {
-            var p = personas.Where(p => p.DNI == persona.DNI).FirstOrDefault();
+            try
+            {
+                var p = personas.Where(p => p.DNI == persona.DNI).FirstOrDefault();
 
-            if (p == null) return NotFound(persona);
+                if (p == null) 
+                    return NotFound(persona);
 
-            p.DNI = persona.DNI;
-            p.Nombre = persona.Nombre;
+                p.DNI = persona.DNI;
+                p.Nombre = persona.Nombre;
 
-            return Ok(p);
+                return Ok(p);
+            }
+            catch(Exception ex)
+            {
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);  
+            }
         }
 
         // DELETE api/<PersonasController>/5
         [HttpDelete("{dni}")]
         public IActionResult Delete(int dni)
         {
-            var p = personas.Where(p => p.DNI == dni).FirstOrDefault();
+            try
+            {
+                var p = personas.Where(p => p.DNI == dni).FirstOrDefault();
 
-            if (p == null) return NotFound();
+                if (p == null) return NotFound();
 
-            personas.Remove(p);
+                personas.Remove(p);
 
-            return Ok();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);
+            }
         }
-
-      
     }
 }

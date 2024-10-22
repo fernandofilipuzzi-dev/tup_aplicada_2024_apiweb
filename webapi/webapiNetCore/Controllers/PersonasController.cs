@@ -21,7 +21,7 @@ namespace webapi.Controllers
              //funciono
              //_personaDao = new PersonaDao(@"Server=TSP;Database=prueba2;Integrated Security=True; Trusted_Connection=True;TrustServerCertificate=True;");
              //_personaDao = new PersonaDao(@"Server=PersonasDB.mssql.somee.com;Database=PersonasDB;User Id=fernando-utn_SQLLogin_1;Password=j3zdsvlw4z;TrustServerCertificate=True;");
-             _personaDao = new PersonaDao(@"Server=172.17.0.3;Database=PersonasDB;User Id=sa;Password=MSS-fernando-sql;TrustServerCertificate=True;"); 
+             _personaDao = new PersonaDao(@"Server=172.17.0.2;Database=PersonasDB;User Id=sa;Password=MSS-fernando-sql;TrustServerCertificate=True;"); 
         }
 
         // GET: api/<PersonasController>
@@ -40,11 +40,36 @@ namespace webapi.Controllers
             }
         }
 
+        [HttpGet("{dni}")]
+        public IActionResult Get(int dni)
+        {
+            try
+            {
+                Persona p=_personaDao.GetByDNI(dni);
+
+                if(p!=null)
+                return Ok(p);
+                else
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);  
+            }
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] Persona persona)
         {
-            _personaDao.Add(persona);
-            return CreatedAtAction(nameof(Get), new { id = persona.Id }, persona);
+            try
+            {
+                _personaDao.Add(persona);
+                return CreatedAtAction(nameof(Get), new { id = persona.Id }, persona);
+            }
+            catch(Exception ex)
+            {
+                 return Problem( "Ocurrió un error al obtener las personas.", ex.Message+"|"+ ex.StackTrace);
+            }
         }
     }
 }

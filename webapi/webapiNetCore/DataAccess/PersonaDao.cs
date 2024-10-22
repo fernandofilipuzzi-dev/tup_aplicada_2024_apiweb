@@ -53,5 +53,37 @@ namespace webapi.DataAccess
 
             return personas;
         }
+
+         public Persona GetByDNI(int dni)
+        {
+            var personas = new List<Persona>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("SELECT TOP 1 * FROM Personas WHERE DNI=@DNI", connection);
+                command.Parameters.AddWithValue("DNI", dni);
+
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var persona = new Persona
+                        {
+                            Id = reader.GetInt32("Id"),
+                            DNI = reader.GetInt32("DNI"),
+                            Nombre = reader.GetString("Nombre"),
+                            FechaNacimiento = reader.GetDateTime("Fecha_Nacimiento")
+                        };
+                        personas.Add(persona);
+                    }
+                }
+            }
+
+            if(personas.Count>0) 
+                return personas[0];
+            return null;
+        }
     }
 }
