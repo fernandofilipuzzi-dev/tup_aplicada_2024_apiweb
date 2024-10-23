@@ -32,11 +32,9 @@ namespace webapi.Controllers
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", fileName);
 
-            // Verifica si el archivo existe
             if (!System.IO.File.Exists(path))
                 return NotFound("El archivo no fue encontrado");
 
-            // Devuelve el archivo como un archivo de contenido
             var fileBytes = System.IO.File.ReadAllBytes(path);
             var contentType = "application/octet-stream"; // Cambia el tipo de contenido si es necesario
             return File(fileBytes, contentType, fileName);
