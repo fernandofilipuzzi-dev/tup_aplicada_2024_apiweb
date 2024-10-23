@@ -2,8 +2,14 @@
 
 
 docker stop webapi2
-docker rm webapi2:v2.2
-docker rmi webapi2
+
+sleep 2
+
+docker rm webapi2
+
+sleep 2
+
+docker rmi webapi2:v2.2
 
 # elimina solo ls imagenes colgantes o dangling- none
 docker image prune -f
